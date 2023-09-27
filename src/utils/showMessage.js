@@ -9,7 +9,7 @@ import styles from "./showMessage.module.less";
  * @param {Number} duration 多久后消失
  * @param {HTMLElement} container 容器，消息会显示到该容器的正中；如果不传，则显示到页面正中
  */
-export default function(options = {}) {
+export default function (options = {}) {
   const content = options.content || "";
   const type = options.type || "info";
   const duration = options.duration || 2000;
@@ -46,7 +46,7 @@ export default function(options = {}) {
     div.style.transform = `translate(-50%, -50%) translateY(-25px)`;
     div.addEventListener(
       "transitionend",
-      function() {
+      function () {
         div.remove();
         // 运行回调函数
         options.callback && options.callback();
