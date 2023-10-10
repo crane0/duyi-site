@@ -1,5 +1,5 @@
 <template>
-  <div class="home-container" ref="container" @wheel="handleWheel">
+  <div v-loading="isLoading" class="home-container" ref="container" @wheel="handleWheel">
     <ul class="carousel-container" :style="{ marginTop }" @transitionend="handleTransitionEnd">
       <li v-for="item in banners" :key="item.id">
         <CarouselItem :carousel="item" />
@@ -112,14 +112,16 @@ export default {
   },
   data() {
     return {
+      isLoading: true,
       banners: [],
-      index: 1, // 当前显示的是第几张轮播图
+      index: 0, // 当前显示的是第几张轮播图
       containerHeight: 0, // 整个容器的高度
       switching: false, // 是否正在切换中
     };
   },
   async created() {
     this.banners = await getBanners();
+    this.isLoading = false;
   },
   mounted() {
     this.containerHeight = this.$refs.container.clientHeight;
