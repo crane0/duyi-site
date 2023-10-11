@@ -103,7 +103,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import "~@/styles/var.less";
 .carousel-item-container {
   // background: @dark;
   width: 100%;
