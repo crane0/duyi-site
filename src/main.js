@@ -5,6 +5,7 @@ import router from "./router";
 import showMessage from "./utils/showMessage";
 import "./mock";
 import "./styles/global.less";
+import "./eventBus";
 Vue.prototype.$showMessage = showMessage;
 
 // 注册全局指令
