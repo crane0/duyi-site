@@ -33,14 +33,21 @@ export default {
       return await getBlog(this.$route.params.id);
     },
     handleScroll() {
-      this.$bus.$emit("mainScroll"); // 详情内容滚动时，触发 BlogTOC 中的事件
+      this.$bus.$emit("mainScroll", this.$refs.mainContainer); // 详情内容滚动时，触发 BlogTOC 中的事件
+    },
+    handleSetMainScroll(scrollTop) {
+      this.$refs.mainContainer.scrollTop = scrollTop;
     },
   },
   mounted() {
+    this.$bus.$on("setMainScroll", this.handleSetMainScroll);
     this.$refs.mainContainer.addEventListener("scroll", this.handleScroll);
   },
-  destroyed() {
+  beforeDestroy() {
+    // 切换页面时，该事件传参为 undefined，在 toTop 组件中判断隐藏。
+    this.$bus.$emit("mainScroll");
     this.$refs.mainContainer.removeEventListener("scroll", this.handleScroll);
+    this.$bus.$off("setMainScroll", this.handleSetMainScroll);
   },
   // 页面刷新后，接口数据返回后，会触发更新。此时重新设置 hash 触发滚动来定位。
   updated() {

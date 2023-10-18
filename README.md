@@ -23,7 +23,7 @@
 
 ## 文章详情页知识点
 
-主要是【文章详情页 4】这个提交中，`src\views\Blog\Detail.vue` 和 `src\views\Blog\components\BlogTOC.vue` 这 2 个文件之间的互动。
+commit -【文章详情页 4】中，`src\views\Blog\Detail.vue` 和 `src\views\Blog\components\BlogTOC.vue` 这 2 个文件之间的互动。
 
 1. 文章详情页内容滚动时，右侧列表页需要同步更新被选中的目录。
 
@@ -32,3 +32,9 @@
 2. 页面刷新后，自动定位。
 
 > 当页面加载完成后 window.onload 执行时，vue 项目页面的元素只有 div#app，此时 url 中的 hash 会进行跳转，但是因为还没有通过 vue 生成对应的 DOM 元素，所以无法完成正确跳转。所以可以先将 hash 设为空，再设回来。
+
+commit - 【文章详情页 5】中，增加了 toTop 组件。
+
+主要问题：当切换页面时，滚动条会回到顶部，所以 toTop 组件应隐藏。
+
+解决：在 `src\views\Blog\Detail.vue` 这样有滚动的组件中，在 `beforeDestroy` 中触发 `this.$bus.$emit("mainScroll");` 此时传参为 undefined，在 toTop 组件中做判断即可。
