@@ -61,11 +61,12 @@
 <script>
 import Pager from "@/components/Pager";
 import fetchData from "@/mixins/fetchData.js";
+import mainScroll from "@/mixins/mainScroll.js";
 import { getBlogs } from "@/api/blog.js";
 import { formatDate } from "@/utils";
 
 export default {
-  mixins: [fetchData({})],
+  mixins: [fetchData({}), mainScroll("mainContainer")],
   components: {
     Pager,
   },
@@ -81,15 +82,6 @@ export default {
         limit,
       };
     },
-  },
-  mounted() {
-    this.$bus.$on("setMainScroll", this.handleSetMainScroll);
-    this.$refs.mainContainer.addEventListener("scroll", this.handleScroll);
-  },
-  beforeDestroy() {
-    this.$bus.$emit("mainScroll");
-    this.$refs.mainContainer.removeEventListener("scroll", this.handleScroll);
-    this.$bus.$off("setMainScroll", this.handleSetMainScroll);
   },
   methods: {
     formatDate,
@@ -117,12 +109,6 @@ export default {
           },
         });
       }
-    },
-    handleScroll() {
-      this.$bus.$emit("mainScroll", this.$refs.mainContainer);
-    },
-    handleSetMainScroll(scrollTop) {
-      this.$refs.mainContainer.scrollTop = scrollTop;
     },
   },
   watch: {
