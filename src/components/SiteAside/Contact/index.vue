@@ -1,32 +1,32 @@
 <template>
   <ul class="contact-container">
     <li>
-      <a href="">
+      <a target="_blank" :href="data.github">
         <div class="icon">
           <Icon type="github" />
         </div>
-        <span>DuYi-Edu</span>
+        <span>{{ data.githubName }}</span>
       </a>
     </li>
     <li>
-      <a href="mailto:23423424234@qq.com">
+      <a :href="`mailto:${data.mail}`">
         <div class="icon">
           <Icon type="mail" />
         </div>
-        <span>23423424234@qq.com</span>
+        <span>{{ data.mail }}</span>
       </a>
     </li>
     <li>
       <a
-        href="tencent://message/?Menu=yes&uin=3263023350&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45"
+        :href="`tencent://message/?Menu=yes&uin=${data.qq}&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45`"
       >
         <div class="icon">
           <Icon type="qq" />
         </div>
-        <span>3263023350</span>
+        <span>{{ data.qq }}</span>
       </a>
       <div class="pop">
-        <img src="https://crane0.oss-cn-beijing.aliyuncs.com/other/gitAvator.gif" alt="" />
+        <img :src="data.qqQrCode" alt="" />
       </div>
     </li>
     <li>
@@ -34,10 +34,10 @@
         <div class="icon weixin">
           <Icon type="weixin" />
         </div>
-        <span>dsfggasas</span>
+        <span>{{ data.weixin }}</span>
       </a>
       <div class="pop">
-        <img src="https://crane0.oss-cn-beijing.aliyuncs.com/other/gitAvator.gif" alt="" />
+        <img :src="data.weixinQrCode" alt="" />
       </div>
     </li>
   </ul>
@@ -45,10 +45,13 @@
 
 <script>
 import Icon from "@/components/Icon";
+import { mapState } from "vuex";
+
 export default {
   components: {
     Icon,
   },
+  computed: mapState("setting", ["data"]),
 };
 </script>
 

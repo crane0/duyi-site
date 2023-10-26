@@ -6,6 +6,10 @@ import showMessage from "./utils/showMessage";
 import "./mock";
 import "./styles/global.less";
 import "./eventBus";
+
+import store from "./store";
+store.dispatch("setting/fetchSetting");
+
 Vue.prototype.$showMessage = showMessage;
 
 // 注册全局指令
@@ -16,5 +20,6 @@ Vue.directive("lazy", vLazy);
 
 new Vue({
   router,
+  store,
   render: (h) => h(App),
 }).$mount("#app");
