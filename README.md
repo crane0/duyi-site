@@ -38,3 +38,9 @@ commit - 【文章详情页 5】中，增加了 toTop 组件。
 主要问题：当切换页面时，滚动条会回到顶部，所以 toTop 组件应隐藏。
 
 解决：在 `src\views\Blog\Detail.vue` 这样有滚动的组件中，在 `beforeDestroy` 中触发 `this.$bus.$emit("mainScroll");` 此时传参为 undefined，在 toTop 组件中做判断即可。
+
+## 页面标题统一处理
+
+因为每个路由有自己的标题，网站本身也有标题。所以可以定义 2 个方法来设置，最后统一处理。 `src\utils\titleController.js`
+
+在特殊的页面，比如文章详情，单独再设置一次。 `src\views\Blog\Detail.vue`

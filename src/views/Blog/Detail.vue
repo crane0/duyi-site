@@ -20,6 +20,7 @@ import Layout from "@/components/Layout";
 import BlogDetail from "./components/BlogDetail";
 import BlogTOC from "./components/BlogTOC";
 import BlogComment from "./components/BlogComment";
+import { titleController } from "@/utils";
 
 export default {
   components: {
@@ -31,7 +32,9 @@ export default {
   mixins: [fetchData(null), mainScroll("mainContainer")],
   methods: {
     async fetchData() {
-      return await getBlog(this.$route.params.id);
+      const resp = await getBlog(this.$route.params.id);
+      titleController.setRouteTitle(resp.title);
+      return resp;
     },
   },
   // 页面刷新后，接口数据返回后，会触发更新。此时重新设置 hash 触发滚动来定位。
